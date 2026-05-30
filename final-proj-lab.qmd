@@ -1,0 +1,142 @@
+---
+title: "Final Project Rough Draft"
+author:
+  - "Darien Rodrigo"
+  - "Rachel Le"
+  - "Patrick Zhou"
+format: html
+embed-resources: true
+---
+
+
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+```
+
+## Part 1: Loading and Looking at Our Data
+
+```{r}
+spotify <- read_csv('https://raw.githubusercontent.com/FisherFraley/Datafest_Workshop/refs/heads/main/spotify_dataset.csv')
+```
+
+# Inspecting Our Data:
+```{r}
+glimpse(spotify)
+head(spotify)
+summary(spotify)
+names(spotify)
+```
+
+What are the names of our columns?
+
+What are some of the datatypes we're working on?
+
+## Part 2: Cleaning our Data & Making it make more sense
+
+Looking at our data, with all these artists and how much data we have on them, it would be a lot of trouble to make sure we have every piece of data that we need on each of these artists!
+
+Luckily for us, we can use some handy functions to clean our data
+
+
+First, we should check for missing values.
+```{r}
+colSums(is.na(spotify))
+```
+What columns have missing data?
+
+Which columns have the most missing data?
+
+Lets remove the missing data in the following steps:
+
+1. Make a fresh dataset & get rid of the missing entries
+
+
+```{r}
+spotify_clean <- spotify |>
+  drop_na()
+```
+
+2. Make Friendlier names
+
+```{r}
+spotify_renamed <- spotify_clean |>
+  rename(
+    song_name = track_name,
+    artist = artists
+  )
+```
+
+3.Make the song duration into minutes & add a better way to see popularity
+
+```{r}
+spotify_final <- spotify_renamed |>
+  mutate(
+    duration_min = duration_ms / 60000,
+    popularity_level = case_when(
+      popularity >= 80 ~ "High",
+      popularity >= 50 ~ "Medium",
+      TRUE ~ "Low"
+    )
+  )
+```
+
+## Part 3: Using Dplyr Verbs!
+
+We've now taken a look at the dataset, cleaned it, made it make more sense, what is there to do now?
+
+Obviously...
+
+Work with our data!
+Why clean it and not use it?
+
+In this section, we'll introduce some dplyr verbs that you'll come across.
+
+Stop 1: Filter
+
+Filter works as you'd imagine, it filters the results down
+```{r}
+spotify_final |>
+  filter(popularity > 100)
+```
+
+Stop 2: Select
+You can select specific columns of a dataset suing select.
+
+We'll make a smaller dataset consisting of core values
+
+```{r}
+spotify_small <- spotify_final|>
+  select(artist, song_name, popularity)
+```
+
+Stop 3: Arrange
+
+You can arrange the rows of a dataset by the observations within a column!
+Here, we'll arrange the top 10 by descending popularity.
+```{r}
+spotify_final |>
+  arrange(desc(popularity)) |>
+  head(10)
+```
+
+Stop 4: Summarize
+
+```{r}
+spotify_final |>
+  summarize(
+    avg_popularity = mean(popularity),
+    avg_duration = mean(duration_min)
+  )
+```
+
+Stop 5: Group Summaries
+
+```{r}
+spotify_final |>
+  group_by(track_genre) |>
+  summarize(avg_popularity = mean(popularity)) |>
+  arrange(desc(avg_popularity))
+```
