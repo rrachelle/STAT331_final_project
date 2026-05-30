@@ -8,11 +8,8 @@ format: html
 embed-resources: true
 ---
 
-
-
 ```{r}
 #| label: setup
-
 library(tidyverse)
 ```
 
@@ -23,6 +20,7 @@ spotify <- read_csv('https://raw.githubusercontent.com/FisherFraley/Datafest_Wor
 ```
 
 # Inspecting Our Data:
+
 ```{r}
 glimpse(spotify)
 head(spotify)
@@ -40,26 +38,26 @@ Looking at our data, with all these artists and how much data we have on them, i
 
 Luckily for us, we can use some handy functions to clean our data
 
-
 First, we should check for missing values.
+
 ```{r}
 colSums(is.na(spotify))
 ```
+
 What columns have missing data?
 
 Which columns have the most missing data?
 
 Lets remove the missing data in the following steps:
 
-1. Make a fresh dataset & get rid of the missing entries
-
+1.  Make a fresh dataset & get rid of the missing entries
 
 ```{r}
 spotify_clean <- spotify |>
   drop_na()
 ```
 
-2. Make Friendlier names
+2.  Make Friendlier names
 
 ```{r}
 spotify_renamed <- spotify_clean |>
@@ -89,21 +87,20 @@ We've now taken a look at the dataset, cleaned it, made it make more sense, what
 
 Obviously...
 
-Work with our data!
-Why clean it and not use it?
+Work with our data! Why clean it and not use it?
 
 In this section, we'll introduce some dplyr verbs that you'll come across.
 
 Stop 1: Filter
 
 Filter works as you'd imagine, it filters the results down
+
 ```{r}
 spotify_final |>
   filter(popularity > 100)
 ```
 
-Stop 2: Select
-You can select specific columns of a dataset suing select.
+Stop 2: Select You can select specific columns of a dataset suing select.
 
 We'll make a smaller dataset consisting of core values
 
@@ -114,8 +111,8 @@ spotify_small <- spotify_final|>
 
 Stop 3: Arrange
 
-You can arrange the rows of a dataset by the observations within a column!
-Here, we'll arrange the top 10 by descending popularity.
+You can arrange the rows of a dataset by the observations within a column! Here, we'll arrange the top 10 by descending popularity.
+
 ```{r}
 spotify_final |>
   arrange(desc(popularity)) |>
