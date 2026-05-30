@@ -8,8 +8,10 @@ format: html
 embed-resources: true
 ---
 
+# **Spotify Wrapped 2026.5**
+
 ```{r}
-#| label: setup
+#| label: Load necessary packages
 library(tidyverse)
 ```
 
@@ -19,7 +21,35 @@ library(tidyverse)
 spotify <- read_csv('https://raw.githubusercontent.com/FisherFraley/Datafest_Workshop/refs/heads/main/spotify_dataset.csv')
 ```
 
-# Inspecting Our Data:
+### Spotify Data Definitions
+
+| **Column** | **Type** | **What does this variable mean?** |
+|--------------------------|------------------|----------------------------|
+| `...1` | Numeric | Row number |
+| `track_id` | Character | Unique identifier for each track |
+| `artist` | Character | Artist name(s) that is associated with the song. |
+| `album_name` | Character | Name of the album that the song is in. |
+| `song_name` | Character | Title of the song. |
+| `popularity` | Numeric | Popularity score that ranges from 0-100, higher values indicate a greater popularity. |
+| `duration_ms` | Numeric | Duration of the song in milliseconds. |
+| `explicit` | Logical | Indicates if the song contains explicit content or not (`TRUE` or `FALSE`). |
+| `danceability` | Numeric | A measure from 0-1 for how suitable the song is for dancing. A higher value indicates greater danceability. |
+| `energy` | Numeric | A measure for how energetic the songs are from a scale of 0-1. Higher values indicate more intensity and activity. |
+| `key` | Numeric | Musical key encoded from 0-11 it refers to its musical scale and harmonic root. |
+| `loudness` | Numeric | Loudness of the track measured in decibels(dB). Values closer to 0 means that they are louder. |
+| `mode` | Numeric | Music modality, 0 =minor, 1 = major |
+| `speechiness` | Numeric | Speechiness measures the scale of present spoken words, scale of 0-1, values closer to one means there is more speech-like content. |
+| `acousticness` | Numeric | Measures acoustic from a scale of 0-1. |
+| `instrumentalness` | Numeric | A measure that indicates whether there is more vocal, less instrumental, or vice versa, scale of 0-1, values closer to 1, indicate more instrumental and less vocal. |
+| `liveness` | Numeric | Measures presence of an audience in the recording, scales from 0-1, values closer to 1 suggests it is a live performance. |
+| `valence` | Numeric | Measures the emotional tone of the track on a scale of 0-1, values closer to 1 indicate a happier or more positive sound. |
+| `tempo` | Numeric | The tempo of the song measured by beats per minute (BPM) |
+| `time_signature` | Numeric | The time measure of a song, it indicates the number of beats per measure it is on a scale of 0-5. |
+| `track_genre` | Character | The genre assigned to the track. |
+| `duration_min` | Numeric | Duration of the song in minutes. |
+| `popularity_level` | Character | Popularity level, is the songs categorized from low, medium, high popularity, and it is derived from the popularity score. |
+
+### Inspecting Our Data:
 
 ```{r}
 glimpse(spotify)
