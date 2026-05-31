@@ -10,7 +10,7 @@ embed-resources: true
 
 # **Spotify Wrapped 2026.5**
 
-Ever wondered how your Spotify Wrapped comes together? What better time to investigate than to make our own now that 2026 is halfway through! In the next several questions, you will be asked to clean, compile, and then visualize some of the top artists from this dataset.
+Have you ever wondered how your Spotify Wrapped comes together? Every year, Spotify users get a snapshot of their listening habits, including how many minutes they've spent on Spotify listening to songs, their most streamed song, and their top artist. Data scientists at Spotify are asked to develop algorithms to parse through copious amounts of user data and then present them in digestible and often visually intriguing ways. Now that is what we will do! What better time than the present to make our own Spotify Wrapped now that 2026 is halfway through! In the next several questions, you will be asked to clean, compile, and then visualize some of the top artists from this dataset.
 
 ```{r}
 #| label: Load necessary packages
@@ -30,7 +30,7 @@ spotify <- read_csv('https://raw.githubusercontent.com/FisherFraley/Datafest_Wor
 Below are the meanings of what each column represents—take note of which are numeric, character, or logical variables.
 
 | **Column** | **Type** | **What does this variable mean?** |
-|--------------------------------|--------------------------|-----------------------------------------------------------------------------------|
+|----------------|----------------|---------------------------------------|
 | `...1` | Numeric | Row number |
 | `track_id` | Character | Unique identifier for each track |
 | `artist` | Character | Artist name(s) that is associated with the song. |
@@ -107,9 +107,7 @@ spotify_final <- spotify_renamed |>
 
 ## Part 3: Using Dplyr Verbs!
 
-We've now taken a look at the dataset, cleaned it, made it make more sense, what is there to do now?
-
-Now we get to work off of our clean dataset!
+Now that our data is clean, we can focus on analysis.
 
 In this section, we'll introduce some dplyr verbs that you'll come across.
 
