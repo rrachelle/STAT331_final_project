@@ -30,7 +30,7 @@ spotify <- read_csv('https://raw.githubusercontent.com/FisherFraley/Datafest_Wor
 Below are the meanings of what each column represents—take note of which are numeric, character, or logical variables.
 
 | **Column** | **Type** | **What does this variable mean?** |
-|----------------|----------------|---------------------------------------|
+|----|----|----|
 | `...1` | Numeric | Row number |
 | `track_id` | Character | Unique identifier for each track |
 | `artist` | Character | Artist name(s) that is associated with the song. |
