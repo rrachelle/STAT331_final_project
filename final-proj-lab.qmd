@@ -15,22 +15,24 @@ Have you ever wondered how your Spotify Wrapped comes together? Every year, Spot
 ```{r}
 #| label: Load necessary packages
 library(tidyverse)
+library(knitr)
+library(purrr)
 ```
 
 ## Part 1: Loading and Looking at Our Data
 
-Our dataset is quite intimidating! Breaking it down and understanding what constitutes it makes it easier to understand what we *do* and do *not* need.
-
 ```{r}
 spotify <- read_csv('https://raw.githubusercontent.com/FisherFraley/Datafest_Workshop/refs/heads/main/spotify_dataset.csv')
 ```
+
+Our dataset is quite intimidating! Breaking it down and understanding what constitutes it makes it easier to understand what we *do* and do *not* need.
 
 ### Spotify Data Definitions
 
 Below are the meanings of what each column represents—take note of which are numeric, character, or logical variables.
 
 | **Column** | **Type** | **What does this variable mean?** |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | `...1` | Numeric | Row number |
 | `track_id` | Character | Unique identifier for each track |
 | `artist` | Character | Artist name(s) that is associated with the song. |
@@ -87,9 +89,25 @@ colSums(is.na(spotify))
 
 ```
 
+5.  There are 21 total columns in our dataset. Remove all columns *except* the following: `track_id`, `artists`, `album_name`,`track_name`, `popularity`, `duration`, and `track_genre`.
+
+```{r}
+
+```
+
 5.  Which rows have important information missing? In other words, if rows are missing `track_name`, `artists`, or `album_name` should they even be included in our data set? Remove rows where any of the aforementioned columns contain `NA`.
-6.  Are there any duplicate rows? Remove them!
-7.  Note that column `duration_ms` is in milliseconds. It's quite tough to imagine a song in terms of milliseconds. Convert these milliseconds to minutes.
+
+```{r}
+
+```
+
+5.  Are there any duplicate rows? Remove them!
+
+```{r}
+
+```
+
+5.  Note that column `duration_ms` is in milliseconds. It's quite tough to imagine a song in terms of milliseconds. Convert these milliseconds to minutes.
 
 ```{r}
 spotify_final <- spotify_renamed |>
@@ -105,55 +123,8 @@ spotify_final <- spotify_renamed |>
 
 8.  Song popularity is set from 0 to 100. Categorize each song into 'High', 'Medium', or 'Low' popularity based on their score.
 
-## Part 3: Using Dplyr Verbs!
-
-Now that our data is clean, we can focus on analysis.
-
-In this section, we'll introduce some dplyr verbs that you'll come across.
-
-Stop 1: Filter
-
-Filter works as you'd imagine, it filters the results down
-
 ```{r}
-spotify_final |>
-  filter(popularity > 100)
+
 ```
 
-Stop 2: Select You can select specific columns of a dataset suing select.
-
-We'll make a smaller dataset consisting of core values
-
-```{r}
-spotify_small <- spotify_final|>
-  select(artist, song_name, popularity)
-```
-
-Stop 3: Arrange
-
-You can arrange the rows of a dataset by the observations within a column! Here, we'll arrange the top 10 by descending popularity.
-
-```{r}
-spotify_final |>
-  arrange(desc(popularity)) |>
-  head(10)
-```
-
-Stop 4: Summarize
-
-```{r}
-spotify_final |>
-  summarize(
-    avg_popularity = mean(popularity),
-    avg_duration = mean(duration_min)
-  )
-```
-
-Stop 5: Group Summaries
-
-```{r}
-spotify_final |>
-  group_by(track_genre) |>
-  summarize(avg_popularity = mean(popularity)) |>
-  arrange(desc(avg_popularity))
-```
+## Part 3: Use the Clean Dataset for Analysis
