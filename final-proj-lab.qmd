@@ -118,17 +118,7 @@ spotify_clean <- spotify_clean |>
   )
 ```
 
-```{r}
-spotify_final <- spotify_renamed |>
-  mutate(
-    duration_min = duration_ms / 60000,
-    popularity_level = case_when(
-      popularity >= 80 ~ "High",
-      popularity >= 50 ~ "Medium",
-      TRUE ~ "Low"
-    )
-  )
-```
+
 
 
 ## Part 3: Use the Clean Dataset for Analysis
