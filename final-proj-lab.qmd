@@ -95,19 +95,19 @@ colSums(is.na(spotify))
 
 ```
 
-5.  Which rows have important information missing? In other words, if rows are missing `track_name`, `artists`, or `album_name` should they even be included in our data set? Remove rows where any of the aforementioned columns contain `NA`.
+6.  Which rows have important information missing? In other words, if rows are missing `track_name`, `artists`, or `album_name` should they even be included in our data set? Remove rows where any of the aforementioned columns contain `NA`.
 
 ```{r}
 
 ```
 
-5.  Are there any duplicate rows? Remove them!
+7.  Are there any duplicate rows? Remove them!
 
 ```{r}
 
 ```
 
-5.  Note that column `duration_ms` is in milliseconds. It's quite tough to imagine a song in terms of milliseconds. Convert these milliseconds to minutes.
+8.  Note that column `duration_ms` is in milliseconds. It's quite tough to imagine a song in terms of milliseconds. Convert these milliseconds to minutes.
 
 ```{r}
 spotify_final <- spotify_renamed |>
@@ -121,10 +121,98 @@ spotify_final <- spotify_renamed |>
   )
 ```
 
-8.  Song popularity is set from 0 to 100. Categorize each song into 'High', 'Medium', or 'Low' popularity based on their score.
+9.  Note that column `duration_ms` is in milliseconds. It's quite tough to imagine a song in terms of milliseconds. Convert these milliseconds to minutes.
 
 ```{r}
 
 ```
 
 ## Part 3: Use the Clean Dataset for Analysis
+
+10. Now that your dataset has been cleaned, you can begin exploring the songs that make up Spotify's catalog. Before identifying trends, it is useful to understand what a "typical" song looks like.
+
+    Calculate summary statistics for the following variables across all songs:
+
+    -   Popularity
+
+    -   Duration (in minutes)
+
+    -   Danceability
+
+    -   Energy
+
+    Based on these summaries, describe the average song in this dataset. What characteristics seem most common?
+
+```{r}
+
+```
+
+11. Spotify assigns every song a popularity score ranging from 0 to 100. Data scientists often begin by examining how a variable is distributed before drawing conclusions from it.
+
+    Create an appropriate visualization of song popularity.
+
+    After creating your visualization, answer the following:
+
+    -   Is song popularity normally distributed?
+
+    -   Are most songs highly popular or relatively unknown?
+
+    -   Are there any unusual patterns or outliers that stand out?
+
+```{r}
+
+```
+
+12. Spotify assigns every song a popularity score ranging from 0 to 100. Data scientists often begin by examining how a variable is distributed before drawing conclusions from it.
+
+    Create an appropriate visualization of song popularity.
+
+    After creating your visualization, answer the following:
+
+    -   Is song popularity normally distributed?
+
+    -   Are most songs highly popular or relatively unknown?
+
+    -   Are there any unusual patterns or outliers that stand out?
+
+```{r}
+
+```
+
+13. Imagine that this dataset represents your listening history for the first half of 2026. Spotify Wrapped often highlights a listener's favorite artists and genres.
+
+    Identify:
+
+    -   Your top artist (the artist appearing most often)
+
+    -   Your top five artists
+
+    -   Your top genre
+
+    Create a table summarizing your findings.
+
+    What do these results suggest about your listening habits?
+
+```{r}
+
+```
+
+14. Suppose Spotify generates a random playlist containing 25 songs from its catalog.
+
+    Would that playlist tend to contain highly popular songs, or would it mostly contain average songs?
+
+    To investigate:
+
+    1.  Randomly sample 25 songs.
+
+    2.  Compute the playlist's average popularity.
+
+    3.  Repeat this process 1,000 times.
+
+    Visualize the resulting distribution of average popularity scores.
+
+    Based on your simulation, what popularity score would you expect for a typical playlist?
+
+```{r}
+
+```
