@@ -1,5 +1,5 @@
 ---
-title: "Final Project Rough Draft"
+title: "Final Project Final Draft"
 author:
   - "Darien Rodrigo"
   - "Rachel Le"
