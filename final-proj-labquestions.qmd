@@ -19,6 +19,7 @@ Have you ever wondered how your Spotify Wrapped comes together? Every year, Spot
 ## Part 1: Loading and Looking at Our Data
 
 ```{r}
+spotify <- read_csv('https://raw.githubusercontent.com/FisherFraley/Datafest_Workshop/refs/heads/main/spotify_dataset.csv')
 ```
 
 Our dataset is quite intimidating! Breaking it down and understanding what constitutes it makes it easier to understand what we *do* and do *not* need.
