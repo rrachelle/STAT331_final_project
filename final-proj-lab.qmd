@@ -77,6 +77,10 @@ Looking at our data, with all these artists and how much data we have on them, i
 
 Luckily for us, we can use some handy functions to clean our data. Create a new dataframe named `spotify_cleaned` and perform the following tasks:
 
+::: {.callout-note}
+Before analyzing the Spotify data, make sure you remove rows with missing values in important columns
+:::
+
 3.  First, check for missing values.
 
 ```{r}
@@ -219,6 +223,10 @@ head(top_genre, 1)
     Visualize the resulting distribution of average popularity scores.
 
     Based on your simulation, what popularity score would you expect for a typical playlist?
+
+::: {.callout-tip}
+For the playlist simulation, you can use `map_dbl()` to repeat the random sampling process many times.
+:::
 
 ```{r}
 set.seed(100)
