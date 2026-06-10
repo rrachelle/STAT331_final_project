@@ -13,16 +13,12 @@ embed-resources: true
 Have you ever wondered how your Spotify Wrapped comes together? Every year, Spotify users get a snapshot of their listening habits, including how many minutes they've spent on Spotify listening to songs, their most streamed song, and their top artist. Data scientists at Spotify are asked to develop algorithms to parse through copious amounts of user data and then present them in digestible and often visually intriguing ways. Now that is what we will do! What better time than the present to make our own Spotify Wrapped now that 2026 is halfway through! In the next several questions, you will be asked to clean, compile, and then visualize some of the top artists from this dataset.
 
 ```{r}
-#| label: Load necessary packages
-library(tidyverse)
-library(knitr)
-library(purrr)
+
 ```
 
 ## Part 1: Loading and Looking at Our Data
 
 ```{r}
-spotify <- read_csv('https://raw.githubusercontent.com/FisherFraley/Datafest_Workshop/refs/heads/main/spotify_dataset.csv')
 ```
 
 Our dataset is quite intimidating! Breaking it down and understanding what constitutes it makes it easier to understand what we *do* and do *not* need.
@@ -62,13 +58,11 @@ Below are the meanings of what each column represents—take note of which are n
 1.  What are the names of our columns?
 
 ```{r}
-names(spotify)
 ```
 
 2.  What are some of the datatypes we're working with?
 
 ```{r}
-glimpse(spotify)
 ```
 
 ## Part 2: Clean the Data!
@@ -84,42 +78,32 @@ Before analyzing the Spotify data, make sure you remove rows with missing values
 3.  First, check for missing values.
 
 ```{r}
-colSums(is.na(spotify))
 ```
 
 4.  What columns have missing data?
 
 
 ```{r}
-# Track Name, Artists, Album Name have missing data
 ```
 
 5.  There are 21 total columns in our dataset. Remove all columns *except* the following: `track_id`, `artists`, `album_name`,`track_name`, `popularity`, `duration_ms`, and `track_genre`.
 
 ```{r}
-spotify_clean <- spotify |>
-  select(track_id, artists, album_name, track_name, popularity, duration_ms, track_genre)
 ```
 
 6.  Which rows have important information missing? In other words, if rows are missing `track_name`, `artists`, or `album_name` should they even be included in our data set? Remove rows where any of the aforementioned columns contain `NA`.
 
 ```{r}
-spotify_clean <- na.omit(spotify_clean)
 ```
 
 7.  Are there any duplicate rows? Remove them!
 
 ```{r}
-spotify_clean <- unique(spotify_clean)
 ```
 
 8.  Note that column `duration_ms` is in milliseconds. It's quite tough to imagine a song in terms of milliseconds. Convert these milliseconds to minutes.
 
 ```{r}
-spotify_clean <- spotify_clean |>
-  mutate(
-    duration_min = duration_ms / 60000
-  )
 ```
 
 
@@ -142,13 +126,6 @@ spotify_clean <- spotify_clean |>
     Based on these summaries, describe the average song in this dataset. What characteristics seem most common?
 
 ```{r}
-spotify <- spotify |>
-  mutate(
-    duration_min = duration_ms / 60000
-  )
-summary(
-  spotify[, c("popularity","duration_min","danceability","energy")]
-)
 ```
 
 10. Spotify assigns every song a popularity score ranging from 0 to 100. Data scientists often begin by examining how a variable is distributed before drawing conclusions from it.
@@ -164,15 +141,6 @@ summary(
     -   Are there any unusual patterns or outliers that stand out?
 
 ```{r}
-ggplot(spotify_clean,
-       aes(x = popularity)) +
-  geom_histogram(binwidth = 3,
-                 fill = "darkgreen",
-                 color = "black") +
-  labs(
-    title = "Distribution of Song Popularity",
-    x = "Popularity",
-    y = "Score"
   )
 ```
 Song Popularity looks to be mostly normally distributed. The curve sits a little left of 50 so that means more songs are lesser known. There is a large outlier sitting on 0.
@@ -193,19 +161,7 @@ Song Popularity looks to be mostly normally distributed. The curve sits a little
     What do these results suggest about your listening habits?
 
 ```{r}
-top_artist <- spotify_clean |>
-  arrange(desc(popularity)) |>
-  select(artists)
-head(top_artist, 1)
 
-
-head(top_artist)
-
-top_genre <- spotify_clean |>
-  arrange(desc(popularity)) |>
-  select(track_genre)
-
-head(top_genre, 1)
 ```
 
 12. Suppose Spotify generates a random playlist containing 25 songs from its catalog.
@@ -229,24 +185,5 @@ For the playlist simulation, you can use `map_dbl()` to repeat the random sampli
 :::
 
 ```{r}
-set.seed(100)
 
-rand_playlist <- spotify_clean |>
-  map_dbl(
-  .x = 1:1000,
-  .f = ~ mean(sample(spotify_clean$popularity, size = 25))
-)
-
-
-hist(
-  rand_playlist,
-  main = "Distribution of Average Playlist Popularity",
-  xlab = "Average Popularity",
-  col = "steelblue",
-  border = "white"
-)
-
-mean(rand_playlist)
-
-sd(rand_playlist)
 ```
